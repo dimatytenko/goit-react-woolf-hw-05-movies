@@ -9,6 +9,7 @@ import {
 
 import moviesAPI from '../../API/movie-api';
 import styles from './MovieDetailsPage.module.css';
+import { defaultImg } from '../../constants/common';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -47,8 +48,13 @@ const MovieDetailsPage = () => {
           <div className={styles.box}>
             <div className={styles.img}>
               <img
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    : defaultImg
+                }
+                width={250}
+                alt="poster"
               />
             </div>
             <div>

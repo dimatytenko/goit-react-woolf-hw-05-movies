@@ -1,13 +1,29 @@
-import React from 'react';
+import { useState } from 'react';
 
-const MoviePageForm = ({ onSubmit, onChange, value }) => {
+const MoviePageForm = ({ onSubmit }) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = e => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSubmitForm = e => {
+    e.preventDefault();
+    if (inputValue.trim() === '') {
+      return;
+    }
+    onSubmit({ query: inputValue });
+
+    setInputValue('');
+  };
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmitForm}>
       <input
-        value={value}
+        value={inputValue}
         type="text"
         placeholder="Search films"
-        onChange={onChange}
+        onChange={handleInputChange}
       />
       <button type="submit">
         <span>Search</span>

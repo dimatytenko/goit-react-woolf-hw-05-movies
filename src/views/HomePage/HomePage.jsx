@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import moviesAPI from '../../API/movie-api';
+import MoviesList from '../../components/MoviesList';
 
 const HomePage = () => {
   const [films, setFilms] = useState([]);
@@ -30,17 +30,7 @@ const HomePage = () => {
 
       {loading && <p>Loading...</p>}
 
-      {!!films.length && (
-        <ul>
-          {films.map(film => (
-            <li key={film.id}>
-              <Link to={`/movies/${film.id}`} state={{ from: '/' }}>
-                {film.original_title || film.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {!!films.length && <MoviesList films={films} />}
 
       {error && <p>{error}</p>}
     </div>

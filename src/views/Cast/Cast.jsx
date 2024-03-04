@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import moviesAPI from '../../API/movie-api';
+import { defaultImg } from '../../constants/common';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -35,7 +36,11 @@ const Cast = () => {
           {cast.map(actor => (
             <li key={actor.id}>
               <img
-                src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                src={
+                  actor.profile_path
+                    ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
+                    : defaultImg
+                }
                 alt={actor.name}
                 width="100"
               />
